@@ -32,6 +32,6 @@ LINQ
         compute % from global population for each country.
 
 
-Nu uitati si de tema din slide. 
+Nu uitati si de tema din prezentare. 
 
 Happy Coding :)
