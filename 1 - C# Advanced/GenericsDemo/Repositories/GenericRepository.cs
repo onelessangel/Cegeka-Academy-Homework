@@ -16,19 +16,32 @@ namespace GenericsDemo.Repositories {
             _postSave = postSave;
         }
 
+        public GenericRepository() { }
+
         public void Add(T item) {
             item.Id = _items.Count + 1;
             _items.Add(item);
         }
 
         public void Save() {
-            _preSave();
+            if (_preSave!= null)
+            {
+                _preSave();
+            }
+            
             foreach (var item in _items) {
                 Console.WriteLine(item);
             }
-            _postSave();
+
+            if (_postSave!= null)
+            {
+                _postSave();
+            }
         }
 
-        // TODO De adaugat o metoda noua care imi va returna un obiect dupa ID
+        // TODO: De adaugat o metoda noua care imi va returna un obiect dupa ID
+        public T GetById(int id) {
+            return _items.Find(x => x.Id == id);
+        }
     }
 }

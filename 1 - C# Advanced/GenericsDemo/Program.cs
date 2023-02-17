@@ -1,15 +1,102 @@
-﻿using System.Collections.Generic;
+﻿using GenericsDemo.Entities;
+using GenericsDemo.Repositories;
+using GenericsDemo.SetImplementation;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace GenericsDemo {
     class Program {
         //TODO  First country that contains in name `ana`
         //*     Single country that contains more than 1 billion
-        // // Home work => compute % from global population for each country.
+        // Home work => compute % from global population for each country.
 
         static void Main(string[] args)
         {
-            
+            // genericity test
+            Console.WriteLine("---------------- GENERICITY TEST ----------------");
+            var repo = new GenericRepository<IEntity>();
+            repo.Add(new Employee() { FirstName = "John" });
+            repo.Add(new Organization() { Name = "Cegeka" });
+            repo.Save();
+
+            Console.Write("Enter a valid id: ");
+            int id = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine(repo.GetById(id));
+            Console.WriteLine();
+
+            // LINQ tasks
+            Console.WriteLine("---------------- LINQ tasks ----------------");
+            var countries = GetCountries();
+            var firstCountry = countries.FirstOrDefault(country => country.Name.Contains("ana"));
+
+            Country singleCountry;
+            Func<Country, bool> populationCheck = country => country.Population > 1000000000;
+
+            try
+            {
+                singleCountry = countries.SingleOrDefault(populationCheck);
+            }
+            catch (InvalidOperationException e)
+            {
+
+                singleCountry = countries.FirstOrDefault(populationCheck);
+            }
+
+            Console.WriteLine(firstCountry);
+            Console.WriteLine(singleCountry);
+            Console.WriteLine();
+
+            // all countries with big population, descending by name
+            //var populatedCountries = countries
+            //                            .Where(populationCheck)
+            //                            .OrderByDescending(c => c.Name);
+            //foreach (var country in populatedCountries)
+            //{
+            //    Console.WriteLine(country.Name);
+            //}
+
+            // compute percentages of global population
+            var globalPopulation = countries.Sum(country => country.Population);
+            double populationPercentage;
+            foreach (var country in countries)
+            {
+                populationPercentage = (double)country.Population / globalPopulation * 100;
+                Console.WriteLine(country.Name + "'s population is " + populationPercentage.ToString("0.000000") + "% of global population.");
+            }
+            Console.WriteLine();
+
+            Console.WriteLine("---------------- Set tests ----------------");
+            var mySet = new Set<string>();
+
+            // test Insert()
+            mySet.Insert("Alex");
+            mySet.Insert("Ana");
+            mySet.Insert("Daria");
+            mySet.Print();
+
+            // test Remove()
+            mySet.Remove("Ana");
+            mySet.Print();
+
+            // test Contains()
+            Console.WriteLine(mySet.Contains("Alex"));      // true
+            Console.WriteLine(mySet.Contains("Alexandra")); // false
+
+            // test Merge()
+            var mySet2 = new Set<string>();
+            mySet2.Insert("Ilie");
+            mySet2.Insert("Darius");
+            mySet2.Insert("Daria");
+
+            mySet.Merge(mySet2).Print();
+
+            mySet.Insert("Alex");
+            mySet.Print();
+
+            mySet.Filter(x => x.Length % 2 == 0).Print();
         }
 
         static async Task GetDataFromFileAsync() {
@@ -23,6 +110,7 @@ namespace GenericsDemo {
         {
             return s.Length;
         }
+
         static List<Country> GetCountries() {
             var countries = new List<Country>()
             {
@@ -975,6 +1063,7 @@ new Country() {
     public class Country {
         public string Name { get; set; }
         public long Population { get; set; }
+        public override string ToString() => $"Name: {Name}, Population: {Population}";
     }
 
 }
