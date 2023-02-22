@@ -5,9 +5,13 @@ namespace CalculatorTesting
 {
     public class Tests
     {
+        Calculator calculator;
+        int result;
+
         [SetUp]
         public void Setup()
         {
+            calculator = new Calculator();
         }
 
         [Test]
@@ -15,10 +19,9 @@ namespace CalculatorTesting
         {
             // arrange
             string numbers = "";
-            Calculator calculator = new Calculator();
             
             // act
-            int result = calculator.Add(numbers);
+            result = calculator.Add(numbers);
 
             // assert
             Assert.AreEqual(0, result);
@@ -28,10 +31,7 @@ namespace CalculatorTesting
         public void PassOneStringNumberReturnSameNumber()
         {
             string numbers = "1";
-            Calculator calculator = new Calculator();
-
-            int result = calculator.Add(numbers);
-
+            result = calculator.Add(numbers);
             Assert.AreEqual(1, result);
         }
 
@@ -42,8 +42,7 @@ namespace CalculatorTesting
         [TestCase("1,2,3,5", 11)]
         public void PassMultipleNumbersReturnSum(string numbers, int expectedResult)
         {
-           Calculator calculator = new Calculator();
-           int result = calculator.Add(numbers);
+           result = calculator.Add(numbers);
            Assert.AreEqual(expectedResult, result);
         }
 
@@ -51,44 +50,43 @@ namespace CalculatorTesting
         [TestCase("1,2\n3", 6)]
         public void PassMultipleDelimitersReturnSum(string numbers, int expectedResult)
         {
-            Calculator calculator = new Calculator();
-            int result = calculator.Add(numbers);
+            result = calculator.Add(numbers);
             Assert.AreEqual(expectedResult, result);
         }
         
         [Test]
         [TestCase("1,2,")]
-        public void PassStringEndingWithDelimiterReturnError(string numbers)
+        public void PassStringEndingWithSeparatorReturnError(string numbers)
         {
-            Calculator calculator = new Calculator();
-            Assert.Throws<ArgumentException>(() => calculator.Add(numbers));
+            var ex = Assert.Throws<FormatException>(() => calculator.Add(numbers));
+            Assert.That(ex.Message, Is.EqualTo("Numbers cannot end with a separator!"));
         }
 
         [Test]
         [TestCase("//;\n1;3", 4)]
         [TestCase("//|\n1|2|3", 6)]
-        public void PassOneCharacterDelimiterReturnSum(string input, int expectedResult)
+        [TestCase("//sep\n2sep5", 7)]
+        public void PassCustomDelimiterReturnSum(string input, int expectedResult)
         {
-            Calculator calculator = new Calculator();
-            int result = calculator.Add(input);
+            result = calculator.Add(input);
             Assert.AreEqual(expectedResult, result);
         }
 
         [Test]
         [TestCase("//;\n1;3;")]
-        public void PassOneCharacterDelimiterReturnError(string numbers)
+        public void PassCustomDelimiterReturnEndingWithSeparatorError(string numbers)
         {
-            Calculator calculator = new Calculator();
-            Assert.Throws<ArgumentException>(() => calculator.Add(numbers));
+            var ex = Assert.Throws<FormatException>(() => calculator.Add(numbers));
+            Assert.That(ex.Message, Is.EqualTo("Numbers cannot end with a separator!"));
         }
 
-        //[Test]
-        //[TestCase("//sep\n2sep5", 7)]
-        //public void PassMultipleCharactersDelimiterReturnSum(string input, int expectedResult)
-        //{
-        //    Calculator calculator = new Calculator();
-        //    int result = calculator.Add(input);
-        //    Assert.AreEqual(expectedResult, result);
-        //}
+        [Test]
+        [TestCase("//|\n1|2,3", "'|' expected but ',' found at position 3.")]
+        [TestCase("//|\n1|2|3;4", "'|' expected but ';' found at position 5.")]
+        public void PassCustomDelimiterReturnInvalidDelimiterError(string numbers, string errorText)
+        {
+            var ex = Assert.Throws<FormatException>(() => calculator.Add(numbers));
+            Assert.That(ex.Message, Is.EqualTo(errorText));
+        }
     }
 }
