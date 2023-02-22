@@ -1,0 +1,15 @@
+C:\Users\eucli\IdeaProjects\Git\CegekaAcademy_Homework\2 - Testing\StringCalculator\bin\Debug\net6.0\StringCalculator.exe
+C:\Users\eucli\IdeaProjects\Git\CegekaAcademy_Homework\2 - Testing\StringCalculator\bin\Debug\net6.0\StringCalculator.deps.json
+C:\Users\eucli\IdeaProjects\Git\CegekaAcademy_Homework\2 - Testing\StringCalculator\bin\Debug\net6.0\StringCalculator.runtimeconfig.json
+C:\Users\eucli\IdeaProjects\Git\CegekaAcademy_Homework\2 - Testing\StringCalculator\bin\Debug\net6.0\StringCalculator.dll
+C:\Users\eucli\IdeaProjects\Git\CegekaAcademy_Homework\2 - Testing\StringCalculator\bin\Debug\net6.0\StringCalculator.pdb
+C:\Users\eucli\IdeaProjects\Git\CegekaAcademy_Homework\2 - Testing\StringCalculator\obj\Debug\net6.0\StringCalculator.csproj.AssemblyReference.cache
+C:\Users\eucli\IdeaProjects\Git\CegekaAcademy_Homework\2 - Testing\StringCalculator\obj\Debug\net6.0\StringCalculator.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\eucli\IdeaProjects\Git\CegekaAcademy_Homework\2 - Testing\StringCalculator\obj\Debug\net6.0\StringCalculator.AssemblyInfoInputs.cache
+C:\Users\eucli\IdeaProjects\Git\CegekaAcademy_Homework\2 - Testing\StringCalculator\obj\Debug\net6.0\StringCalculator.AssemblyInfo.cs
+C:\Users\eucli\IdeaProjects\Git\CegekaAcademy_Homework\2 - Testing\StringCalculator\obj\Debug\net6.0\StringCalculator.csproj.CoreCompileInputs.cache
+C:\Users\eucli\IdeaProjects\Git\CegekaAcademy_Homework\2 - Testing\StringCalculator\obj\Debug\net6.0\StringCalculator.dll
+C:\Users\eucli\IdeaProjects\Git\CegekaAcademy_Homework\2 - Testing\StringCalculator\obj\Debug\net6.0\refint\StringCalculator.dll
+C:\Users\eucli\IdeaProjects\Git\CegekaAcademy_Homework\2 - Testing\StringCalculator\obj\Debug\net6.0\StringCalculator.pdb
+C:\Users\eucli\IdeaProjects\Git\CegekaAcademy_Homework\2 - Testing\StringCalculator\obj\Debug\net6.0\StringCalculator.genruntimeconfig.cache
+C:\Users\eucli\IdeaProjects\Git\CegekaAcademy_Homework\2 - Testing\StringCalculator\obj\Debug\net6.0\ref\StringCalculator.dll
