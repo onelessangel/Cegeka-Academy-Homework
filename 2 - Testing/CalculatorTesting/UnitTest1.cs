@@ -28,11 +28,11 @@ namespace CalculatorTesting
         }
 
         [Test]
-        public void PassOneStringNumberReturnSameNumber()
+        [TestCase("1", 1)]
+        public void PassOneStringNumberReturnSameNumber(string numbers, int expectedResult)
         {
-            string numbers = "1";
             result = calculator.Add(numbers);
-            Assert.AreEqual(1, result);
+            Assert.AreEqual(expectedResult, result);
         }
 
         [Test]
@@ -56,10 +56,10 @@ namespace CalculatorTesting
         
         [Test]
         [TestCase("1,2,")]
-        public void PassStringEndingWithSeparatorReturnSimpleError(string numbers)
+        public void PassStringEndingWithSeparatorReturnError(string numbers)
         {
             var ex = Assert.Throws<FormatException>(() => calculator.Add(numbers));
-            Assert.That(ex.Message, Is.EqualTo("Numbers cannot end with a separator!"));
+            Assert.That(ex.Message, Is.EqualTo("Numbers cannot end with a separator!\n"));
         }
 
         [Test]
@@ -74,15 +74,15 @@ namespace CalculatorTesting
 
         [Test]
         [TestCase("//;\n1;3;")]
-        public void PassCustomDelimiterReturnSimpleError(string numbers)
+        public void PassCustomDelimiterReturnError(string numbers)
         {
             var ex = Assert.Throws<FormatException>(() => calculator.Add(numbers));
-            Assert.That(ex.Message, Is.EqualTo("Numbers cannot end with a separator!"));
+            Assert.That(ex.Message, Is.EqualTo("Numbers cannot end with a separator!\n"));
         }
 
         [Test]
-        [TestCase("//|\n1|2,3", "'|' expected but ',' found at position 3.")]
-        [TestCase("//|\n1|2|3;4", "'|' expected but ';' found at position 5.")]
+        [TestCase("//|\n1|2,3", "'|' expected but ',' found at position 3.\n")]
+        [TestCase("//|\n1|2|3,4", "'|' expected but ',' found at position 5.\n")]
         public void PassCustomDelimiterReturnSimpleError(string numbers, string errorText)
         {
             var ex = Assert.Throws<FormatException>(() => calculator.Add(numbers));
@@ -90,9 +90,27 @@ namespace CalculatorTesting
         }
 
         [Test]
-        [TestCase("1,-2", "Negative number(s) not allowed: -2")]
-        [TestCase("2,-4,-9", "Negative number(s) not allowed: -4, -9")]
+        [TestCase("1,-2", "Negative number(s) not allowed: -2\n")]
+        [TestCase("2,-4,-9", "Negative number(s) not allowed: -4, -9\n")]
+        [TestCase("//|\n2|-4|-9", "Negative number(s) not allowed: -4, -9\n")]
         public void PassNegativeNumbersReturnSimpleError(string numbers, string errorText)
+        {
+            var ex = Assert.Throws<FormatException>(() => calculator.Add(numbers));
+            Assert.That(ex.Message, Is.EqualTo(errorText));
+        }
+
+        [Test]
+        [TestCase("//;\n1;3;1234", 4)]
+        [TestCase("1,2,5432,3", 6)]
+        public void PassStringWithBigNumbersReturnSum(string input, int expectedResult)
+        {
+            result = calculator.Add(input);
+            Assert.AreEqual(expectedResult, result);
+        }
+
+        [Test]
+        [TestCase("//|\n1|2,-3", "Negative number(s) not allowed: -3\n'|' expected but ',' found at position 3.\n")]
+        public void PassStringWithErrorsReturnMultimpleErrors(string numbers, string errorText)
         {
             var ex = Assert.Throws<FormatException>(() => calculator.Add(numbers));
             Assert.That(ex.Message, Is.EqualTo(errorText));
