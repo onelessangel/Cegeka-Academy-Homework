@@ -13,7 +13,7 @@ namespace StringCalculator
     {
         char[] defautDelimiters = { ',', '\n' };
         int result = 0;
-        StringBuilder errorMessages= new StringBuilder();
+        StringBuilder errorMessages = new StringBuilder();
 
         public int Add(string input)
         {
@@ -54,28 +54,9 @@ namespace StringCalculator
             }
             catch (FormatException e)
             {
-                char invalidDelimiter;
-                int invalidPos = 0;
+                string invalidDelimiterError = CheckInvalidDelimiter(numbersArray, delimiter);
+                errorMessages.Append(invalidDelimiterError);
 
-                foreach (string number in numbersArray)
-                {
-                    bool isNumber = number.All(char.IsNumber);
-
-                    // contains invalid delimeter
-                    if (!isNumber)
-                    {
-                        // first character that is not a number
-                        invalidDelimiter = number.First(x => !char.IsNumber(x));
-
-                        // index of non digit character
-                        invalidPos += number.IndexOf(invalidDelimiter);  
-                        
-                        errorMessages.Append($"'{delimiter}' expected but '{invalidDelimiter}' found at position {invalidPos}.");
-                        break;
-                    }
-
-                    invalidPos += number.Length + 1;
-                }                
             }
 
             if (errorMessages.Length > 0)
@@ -84,6 +65,33 @@ namespace StringCalculator
             }
 
             return result;
+        }
+
+        private string? CheckInvalidDelimiter(string[] numbersArray, string delimiter)
+        {
+            char invalidDelimiter;
+            int invalidPos = 0;
+
+            foreach (string number in numbersArray)
+            {
+                bool isNumber = number.All(char.IsNumber);
+
+                // contains invalid delimeter
+                if (!isNumber)
+                {
+                    // first character that is not a number
+                    invalidDelimiter = number.First(x => !char.IsNumber(x));
+
+                    // index of non digit character
+                    invalidPos += number.IndexOf(invalidDelimiter);
+
+                    return $"'{delimiter}' expected but '{invalidDelimiter}' found at position {invalidPos}.";
+                }
+
+                invalidPos += number.Length + 1;
+            }
+
+            return null;
         }
     }
 }
