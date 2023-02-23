@@ -56,7 +56,7 @@ namespace CalculatorTesting
         
         [Test]
         [TestCase("1,2,")]
-        public void PassStringEndingWithSeparatorReturnError(string numbers)
+        public void PassStringEndingWithSeparatorReturnSimpleError(string numbers)
         {
             var ex = Assert.Throws<FormatException>(() => calculator.Add(numbers));
             Assert.That(ex.Message, Is.EqualTo("Numbers cannot end with a separator!"));
@@ -74,7 +74,7 @@ namespace CalculatorTesting
 
         [Test]
         [TestCase("//;\n1;3;")]
-        public void PassCustomDelimiterReturnEndingWithSeparatorError(string numbers)
+        public void PassCustomDelimiterReturnSimpleError(string numbers)
         {
             var ex = Assert.Throws<FormatException>(() => calculator.Add(numbers));
             Assert.That(ex.Message, Is.EqualTo("Numbers cannot end with a separator!"));
@@ -83,7 +83,16 @@ namespace CalculatorTesting
         [Test]
         [TestCase("//|\n1|2,3", "'|' expected but ',' found at position 3.")]
         [TestCase("//|\n1|2|3;4", "'|' expected but ';' found at position 5.")]
-        public void PassCustomDelimiterReturnInvalidDelimiterError(string numbers, string errorText)
+        public void PassCustomDelimiterReturnSimpleError(string numbers, string errorText)
+        {
+            var ex = Assert.Throws<FormatException>(() => calculator.Add(numbers));
+            Assert.That(ex.Message, Is.EqualTo(errorText));
+        }
+
+        [Test]
+        [TestCase("1,-2", "Negative number(s) not allowed: -2")]
+        [TestCase("2,-4,-9", "Negative number(s) not allowed: -4, -9")]
+        public void PassNegativeNumbersReturnSimpleError(string numbers, string errorText)
         {
             var ex = Assert.Throws<FormatException>(() => calculator.Add(numbers));
             Assert.That(ex.Message, Is.EqualTo(errorText));
