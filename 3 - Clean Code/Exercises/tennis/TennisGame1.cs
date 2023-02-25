@@ -4,86 +4,124 @@ using NUnit.Framework;
 
 namespace Tennis
 {
-  class TennisGame1 : TennisGame
-  {
-    private int m_score1 = 0;
-    private int m_score2 = 0;
-    private string player1Name;
-    private string player2Name;
+	class TennisGame1 : TennisGame
+	{
+		private Player player1 = new Player();
+		private Player player2 = new Player();
 
-    public TennisGame1 (string player1Name, string player2Name)
-    {
-      this.player1Name = player1Name;
-      this.player2Name = player2Name;
-    }
+		private const string ZERO_POINTS = "Love";
+		private const string ZERO_POINTS_EQUALITY = "Love-All";
+		private const string ONE_POINT = "Fifteen";
+		private const string ONE_POINT_EQUALITY = "Fifteen-All";
+		private const string TWO_POINTS = "Thirty";
+		private const string TWO_POINTS_EQUALITY = "Thirty-All";
+		private const string THREE_POINTS = "Forty";
+		private const string THREE_POINTS_EQUALITY = "Forty-All";
+		private const string DEUCE = "Deuce";
+		private const string ADVANTAGE_PLAYER1 = "Advantage player1";
+		private const string ADVANTAGE_PLAYER2 = "Advantage player2";
+		private const string WIN_PLAYER1 = "Win for player1";
+		private const string WIN_PLAYER2 = "Win for player2";
 
-    public void WonPoint (string playerName)
-    {
-      if (playerName == "player1")
-        m_score1 += 1;
-      else
-        m_score2 += 1;
-    }
+		public TennisGame1(string playerName1, string playerName2)
+		{
+			player1.Name = playerName1;
+			player2.Name = playerName2;
+		}
 
-    public string GetScore ()
-    {
-      String score = "";
-      int tempScore=0;
-      if (m_score1==m_score2)
-      {
-        switch (m_score1)
-        {
-        case 0:
-          score = "Love-All";
-          break;
-        case 1:
-          score = "Fifteen-All";
-          break;
-        case 2:
-          score = "Thirty-All";
-          break;
-        case 3:
-          score = "Forty-All";
-          break;
-        default:
-          score = "Deuce";
-          break;
-          
-        }
-      }
-      else if (m_score1>=4 || m_score2>=4)
-      {
-        int minusResult = m_score1-m_score2;
-        if (minusResult==1) score ="Advantage player1";
-        else if (minusResult ==-1) score ="Advantage player2";
-        else if (minusResult>=2) score = "Win for player1";
-        else score ="Win for player2";
-      }
-      else
-      {
-        for (int i=1; i<3; i++)
-        {
-          if (i==1) tempScore = m_score1;
-          else { score+="-"; tempScore = m_score2;}
-          switch(tempScore)
-          {
-          case 0:
-            score+="Love";
-            break;
-          case 1:
-            score+="Fifteen";
-            break;
-          case 2:
-            score+="Thirty";
-            break;
-          case 3:
-            score+="Forty";
-            break;
-          }
-        }
-      }
-      return score;
-    }
-  }
+		public void WonPoint(string playerName)
+		{
+			if (playerName == "player1")
+			{
+				player1.Score++;
+			}
+			else
+			{
+				player2.Score++;
+			}
+		}
+
+		public string GetScore()
+		{
+			string score = string.Empty;
+			int playerScore = 0;
+
+			if (player1.Score == player2.Score)
+			{
+				switch (player1.Score)
+				{
+					case 0:
+						score = ZERO_POINTS_EQUALITY;
+						break;
+					case 1:
+						score = ONE_POINT_EQUALITY;
+						break;
+					case 2:
+						score = TWO_POINTS_EQUALITY;
+						break;
+					case 3:
+						score = THREE_POINTS_EQUALITY;
+						break;
+					default:
+						score = DEUCE;
+						break;
+				}
+			}
+			else if (Math.Max(player1.Score, player2.Score) >= 4)
+			{
+				int scoreDifference = player1.Score - player2.Score;
+
+				if (scoreDifference == 1)
+				{
+					score = ADVANTAGE_PLAYER1;
+				}
+				else if (scoreDifference == -1)
+				{
+					score = ADVANTAGE_PLAYER2;
+				}
+				else if (scoreDifference >= 2)
+				{
+					score = WIN_PLAYER1;
+				}
+				else
+				{
+					score = WIN_PLAYER2;
+				}
+			}
+			else
+			{
+				for (int playerNumber = 1; playerNumber <= 2; playerNumber++)
+				{
+					if (playerNumber == 1)
+					{
+						playerScore = player1.Score;
+					}
+					else
+					{
+						score += "-";
+						playerScore = player2.Score;
+					}
+
+					switch (playerScore)
+					{
+						case 0:
+							score += ZERO_POINTS;
+							break;
+						case 1:
+							score += ONE_POINT;
+							break;
+						case 2:
+							score += TWO_POINTS;
+							break;
+						case 3:
+							score += THREE_POINTS;
+							break;
+					}
+				}
+			}
+
+			return score;
+		}
+	}
 
 }
