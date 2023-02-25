@@ -27,7 +27,7 @@ namespace Tennis
 			ComputePlayerResult(player1);
 			ComputePlayerResult(player2);
 
-			if (PlayersHaveSamePoints())
+			if (player1.Points == player2.Points)
 			{
 				if (player1.Points < 4)
 				{
@@ -39,12 +39,15 @@ namespace Tennis
 					score = DEUCE;
 				}
 			}
-			else if (PlayerWithZeroPoints() || ScoreIsMixed())
+
+			if (PlayerHasZeroPoints() || ScoreIsMixed())
 			{
 				score = player1.Result + "-" + player2.Result;
 			}
-			else if (CheckPlayerWin(player1, player2) ||
-					 CheckPlayerWin(player2, player1))
+			
+
+			if (CheckPlayerWin(player1, player2) ||
+				CheckPlayerWin(player2, player1))
 			{
 				Player2 playerWithMorePoints = GetPlayerWithMorePoints(player1, player2);
 				score = "Win for " + playerWithMorePoints.Name;
@@ -55,7 +58,7 @@ namespace Tennis
 				Player2 playerWithMorePoints = GetPlayerWithMorePoints(player1, player2);
 				score = "Advantage " + playerWithMorePoints.Name;
 			}
-
+		
 			return score;
 		}
 
@@ -96,14 +99,11 @@ namespace Tennis
 			}
 		}
 
-		private bool PlayersHaveSamePoints()
+		public bool PlayerHasZeroPoints()
 		{
-			return player1.Points == player2.Points;
-		}
-
-		public bool PlayerWithZeroPoints()
-		{
-			return player1.Points == 0 || player2.Points == 0;
+			return
+				player1.Points == 0 ||
+				player2.Points == 0;
 		}
 
 		public bool ScoreIsMixed()
