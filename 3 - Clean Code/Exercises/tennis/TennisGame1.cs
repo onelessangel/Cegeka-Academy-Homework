@@ -6,8 +6,8 @@ namespace Tennis
 {
 	class TennisGame1 : TennisGame
 	{
-		private Player player1 = new Player();
-		private Player player2 = new Player();
+		private Player1 player1 = new Player1();
+		private Player1 player2 = new Player1();
 
 		private const string ZERO_POINTS = "Love";
 		private const string ZERO_POINTS_EQUALITY = "Love-All";

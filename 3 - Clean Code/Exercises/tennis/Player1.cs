@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Tennis
 {
-    class Player
+    public class Player1
     {
         public string Name { get; set; } = string.Empty;
         public int Score { get; set; } = 0;
