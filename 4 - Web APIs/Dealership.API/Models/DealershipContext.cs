@@ -8,8 +8,9 @@ namespace Dealership.API.Models
 
 		public DbSet<Model> Models { get; set; }
 		public DbSet<Brand> Brands { get; set; }
+		public DbSet<Customer> Customers { get; set; }
 
-		protected override void OnModelCreating(ModelBuilder modelBuilder)
+		protected override async void OnModelCreating(ModelBuilder modelBuilder)
 		{
 			modelBuilder.Entity<Brand>()
 				.HasMany(b => b.Models)

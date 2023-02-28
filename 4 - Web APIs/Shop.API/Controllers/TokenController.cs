@@ -17,7 +17,7 @@ namespace Shop.API.Controllers
         private readonly ShopContext _context;
         private IConfiguration _configuration;
 
-        public TokenController(ShopContext context, IConfiguration configuration)
+        public TokenController(ShopCoLntext context, IConfiguration configuration)
         {
             _context = context;
             _configuration = configuration;

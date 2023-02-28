@@ -29,6 +29,11 @@ namespace Dealership.API.Models
 				new Model { Id = 13, BrandId = 3, Type = "Sedan", Name = "Passat", Year = 2019, Description = "D-segment sedan for the European market." },
 				new Model { Id = 14, BrandId = 3, Type = "SUV", Name = "T-Cross", Year = 2019, Description = "B-segment crossover SUV built above the MQB A0 platform." },
 				new Model { Id = 16, BrandId = 3, Type = "Van", Name = "Transporter", Year = 2019, Description = "Mid-size van. Available as a panel van." });
+
+			modelBuilder.Entity<Customer>().HasData(
+				new Customer { Id = 1, Name = "Customer1" },
+				new Customer { Id = 2, Name = "Customer2" },
+				new Customer { Id = 3, Name = "Customer3" });
 		}
 	}
 }
