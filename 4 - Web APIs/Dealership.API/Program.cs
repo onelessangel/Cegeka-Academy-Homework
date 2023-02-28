@@ -11,7 +11,7 @@ builder.Services.AddControllers();
 builder.Services.AddDbContext<DealershipContext>(
 	options =>
 	{
-		options.UseInMemoryDatabase("Shop");
+		options.UseInMemoryDatabase("Dealership");
 	});
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

@@ -51,8 +51,7 @@ namespace Shop.API.Models
             modelBuilder.Entity<User>().HasData(
                 new User { Id = 1, UserName = "User1", Password = "Pass1" },
                 new User { Id = 2, UserName = "User2", Password = "Pass2" },
-                new User { Id = 3, UserName = "User3", Password = "Pass3" }
- );
+                new User { Id = 3, UserName = "User3", Password = "Pass3" });
         }
     }
 }
