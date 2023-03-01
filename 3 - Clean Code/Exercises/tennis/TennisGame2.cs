@@ -39,8 +39,7 @@ namespace Tennis
 					score = DEUCE;
 				}
 			}
-
-			if (PlayerHasZeroPoints() || ScoreIsMixed())
+			else if (PlayerHasZeroPoints() || ScoreIsMixed())
 			{
 				score = player1.Result + "-" + player2.Result;
 			}
