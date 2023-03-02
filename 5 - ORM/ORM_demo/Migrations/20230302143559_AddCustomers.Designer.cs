@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ORM_demo;
 
@@ -11,9 +12,10 @@ using ORM_demo;
 namespace ORM_demo.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20230302143559_AddCustomers")]
+    partial class AddCustomers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,38 +23,6 @@ namespace ORM_demo.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
-
-            modelBuilder.Entity("AssociationCustomer", b =>
-                {
-                    b.Property<int>("AssociationsAssocciationId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CustomersCustomerId")
-                        .HasColumnType("int");
-
-                    b.HasKey("AssociationsAssocciationId", "CustomersCustomerId");
-
-                    b.HasIndex("CustomersCustomerId");
-
-                    b.ToTable("AssociationCustomer", (string)null);
-                });
-
-            modelBuilder.Entity("ORM_demo.Association", b =>
-                {
-                    b.Property<int>("AssocciationId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AssocciationId"), 1L, 1);
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("AssocciationId");
-
-                    b.ToTable("Association", (string)null);
-                });
 
             modelBuilder.Entity("ORM_demo.Customer", b =>
                 {
@@ -68,7 +38,7 @@ namespace ORM_demo.Migrations
 
                     b.HasKey("CustomerId");
 
-                    b.ToTable("Customer", (string)null);
+                    b.ToTable("Customer");
                 });
 
             modelBuilder.Entity("ORM_demo.Order", b =>
@@ -89,7 +59,7 @@ namespace ORM_demo.Migrations
 
                     b.HasIndex("CustomerId");
 
-                    b.ToTable("Orders", (string)null);
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("ORM_demo.OrderItem", b =>
@@ -115,7 +85,7 @@ namespace ORM_demo.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("OrderItems", (string)null);
+                    b.ToTable("OrderItems");
                 });
 
             modelBuilder.Entity("ORM_demo.Product", b =>
@@ -135,22 +105,7 @@ namespace ORM_demo.Migrations
 
                     b.HasKey("ProductId");
 
-                    b.ToTable("Products", (string)null);
-                });
-
-            modelBuilder.Entity("AssociationCustomer", b =>
-                {
-                    b.HasOne("ORM_demo.Association", null)
-                        .WithMany()
-                        .HasForeignKey("AssociationsAssocciationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ORM_demo.Customer", null)
-                        .WithMany()
-                        .HasForeignKey("CustomersCustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("ORM_demo.Order", b =>
