@@ -10,7 +10,8 @@ namespace ORM_demo
 	{
 		public int OrderId { get; set; }
 		public DateTime? Created { get; set; }
-		public int customerId { get; set; }
 		public ICollection<OrderItem> Items { get; set; }
+
+		//public virtual Customer Customer{ get; set; }
 	}
 }

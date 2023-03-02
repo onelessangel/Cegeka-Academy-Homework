@@ -11,7 +11,9 @@ internal class Program
 			//AddOrderItem(db);
 			//AddOrder(db);
 
-			RemoveProduct(db);
+			//RemoveProduct(db);
+			//RemoveOrderItem(db);
+			RemoveOrder(db);
 
 			var orders = db.Orders;
 			foreach (var order in orders)
@@ -23,8 +25,15 @@ internal class Program
 
 	private static void RemoveProduct(DatabaseContext db)
 	{
-		var product = db.Products.Find(2);
+		var product = db.Products.Find(1);
 		db.Products.Remove(product);
+		db.SaveChanges();
+	}
+
+	private static void RemoveOrder(DatabaseContext db)
+	{
+		var order = db.Orders.Find(2);
+		db.Orders.Remove(order);
 		db.SaveChanges();
 	}
 
