@@ -12,6 +12,6 @@ namespace ORM_demo
 		public DateTime? Created { get; set; }
 		public ICollection<OrderItem> Items { get; set; }
 
-		//public virtual Customer Customer{ get; set; }
+		public virtual Customer Customer { get; set; }
 	}
 }

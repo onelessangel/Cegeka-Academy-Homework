@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ORM_demo;
 
@@ -11,9 +12,10 @@ using ORM_demo;
 namespace ORM_demo.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20230302150015_AddAssociation")]
+    partial class AddAssociation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,7 +36,7 @@ namespace ORM_demo.Migrations
 
                     b.HasIndex("CustomersCustomerId");
 
-                    b.ToTable("AssociationCustomer", (string)null);
+                    b.ToTable("AssociationCustomer");
                 });
 
             modelBuilder.Entity("ORM_demo.Association", b =>
@@ -51,7 +53,7 @@ namespace ORM_demo.Migrations
 
                     b.HasKey("AssocciationId");
 
-                    b.ToTable("Association", (string)null);
+                    b.ToTable("Association");
                 });
 
             modelBuilder.Entity("ORM_demo.Customer", b =>
@@ -68,7 +70,7 @@ namespace ORM_demo.Migrations
 
                     b.HasKey("CustomerId");
 
-                    b.ToTable("Customer", (string)null);
+                    b.ToTable("Customer");
                 });
 
             modelBuilder.Entity("ORM_demo.Order", b =>
@@ -89,7 +91,7 @@ namespace ORM_demo.Migrations
 
                     b.HasIndex("CustomerId");
 
-                    b.ToTable("Orders", (string)null);
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("ORM_demo.OrderItem", b =>
@@ -115,7 +117,7 @@ namespace ORM_demo.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("OrderItems", (string)null);
+                    b.ToTable("OrderItems");
                 });
 
             modelBuilder.Entity("ORM_demo.Product", b =>
@@ -135,7 +137,7 @@ namespace ORM_demo.Migrations
 
                     b.HasKey("ProductId");
 
-                    b.ToTable("Products", (string)null);
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("AssociationCustomer", b =>

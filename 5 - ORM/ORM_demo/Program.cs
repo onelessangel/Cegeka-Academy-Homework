@@ -19,10 +19,17 @@ internal class Program
 			//AddOrderItem(db, 7);
 			//AddOrder(db, 8);
 
-			//RemoveProduct(db, 13);
-			//RemoveProduct(db, 14);
+			//RemoveOrder(db, 3);
+			//RemoveOrderItem(db, 8);
 			//RemoveOrderItem(db, 6);
 			//RemoveOrder(db);
+
+			//var products = db.Products;
+
+			//foreach (var product in products)
+			//{
+			//	RemoveProduct(db, product.ProductId);
+			//}
 
 			//var orders = db.Orders;
 			//foreach (var order in orders)
