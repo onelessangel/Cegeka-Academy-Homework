@@ -12,8 +12,8 @@ using ORM_demo;
 namespace ORM_demo.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20230302105257_ColoanaDummy")]
-    partial class ColoanaDummy
+    [Migration("20230302124157_RemovedDummy")]
+    partial class RemovedDummy
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -76,9 +76,6 @@ namespace ORM_demo.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Dummy")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("Price")
