@@ -24,34 +24,34 @@ namespace ORM_demo.Migrations
 
             modelBuilder.Entity("AssociationCustomer", b =>
                 {
-                    b.Property<int>("AssociationsAssocciationId")
+                    b.Property<int>("AssociationsAssociationId")
                         .HasColumnType("int");
 
                     b.Property<int>("CustomersCustomerId")
                         .HasColumnType("int");
 
-                    b.HasKey("AssociationsAssocciationId", "CustomersCustomerId");
+                    b.HasKey("AssociationsAssociationId", "CustomersCustomerId");
 
                     b.HasIndex("CustomersCustomerId");
 
-                    b.ToTable("AssociationCustomer", (string)null);
+                    b.ToTable("AssociationCustomer");
                 });
 
             modelBuilder.Entity("ORM_demo.Association", b =>
                 {
-                    b.Property<int>("AssocciationId")
+                    b.Property<int>("AssociationId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AssocciationId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AssociationId"), 1L, 1);
 
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("AssocciationId");
+                    b.HasKey("AssociationId");
 
-                    b.ToTable("Association", (string)null);
+                    b.ToTable("Associations");
                 });
 
             modelBuilder.Entity("ORM_demo.Customer", b =>
@@ -68,7 +68,7 @@ namespace ORM_demo.Migrations
 
                     b.HasKey("CustomerId");
 
-                    b.ToTable("Customer", (string)null);
+                    b.ToTable("Customers");
                 });
 
             modelBuilder.Entity("ORM_demo.Order", b =>
@@ -89,7 +89,7 @@ namespace ORM_demo.Migrations
 
                     b.HasIndex("CustomerId");
 
-                    b.ToTable("Orders", (string)null);
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("ORM_demo.OrderItem", b =>
@@ -115,7 +115,7 @@ namespace ORM_demo.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("OrderItems", (string)null);
+                    b.ToTable("OrderItems");
                 });
 
             modelBuilder.Entity("ORM_demo.Product", b =>
@@ -135,14 +135,14 @@ namespace ORM_demo.Migrations
 
                     b.HasKey("ProductId");
 
-                    b.ToTable("Products", (string)null);
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("AssociationCustomer", b =>
                 {
                     b.HasOne("ORM_demo.Association", null)
                         .WithMany()
-                        .HasForeignKey("AssociationsAssocciationId")
+                        .HasForeignKey("AssociationsAssociationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
