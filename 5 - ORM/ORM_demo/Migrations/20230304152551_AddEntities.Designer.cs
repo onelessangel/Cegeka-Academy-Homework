@@ -12,8 +12,8 @@ using ORM_demo;
 namespace ORM_demo.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20230302143559_AddCustomers")]
-    partial class AddCustomers
+    [Migration("20230304152551_AddEntities")]
+    partial class AddEntities
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,6 +23,38 @@ namespace ORM_demo.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("AssociationCustomer", b =>
+                {
+                    b.Property<int>("AssociationsAssociationId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CustomersCustomerId")
+                        .HasColumnType("int");
+
+                    b.HasKey("AssociationsAssociationId", "CustomersCustomerId");
+
+                    b.HasIndex("CustomersCustomerId");
+
+                    b.ToTable("AssociationCustomer");
+                });
+
+            modelBuilder.Entity("ORM_demo.Association", b =>
+                {
+                    b.Property<int>("AssociationId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AssociationId"), 1L, 1);
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("AssociationId");
+
+                    b.ToTable("Associations");
+                });
 
             modelBuilder.Entity("ORM_demo.Customer", b =>
                 {
@@ -38,7 +70,7 @@ namespace ORM_demo.Migrations
 
                     b.HasKey("CustomerId");
 
-                    b.ToTable("Customer");
+                    b.ToTable("Customers");
                 });
 
             modelBuilder.Entity("ORM_demo.Order", b =>
@@ -106,6 +138,21 @@ namespace ORM_demo.Migrations
                     b.HasKey("ProductId");
 
                     b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("AssociationCustomer", b =>
+                {
+                    b.HasOne("ORM_demo.Association", null)
+                        .WithMany()
+                        .HasForeignKey("AssociationsAssociationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ORM_demo.Customer", null)
+                        .WithMany()
+                        .HasForeignKey("CustomersCustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("ORM_demo.Order", b =>
