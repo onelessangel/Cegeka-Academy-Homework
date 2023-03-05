@@ -1,0 +1,373 @@
+{
+	"info": {
+		"_postman_id": "af750f2b-55af-4fe5-a953-059bb5471f34",
+		"name": "DealershipWorkshop",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Show All Models",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7103/api/models",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7103",
+					"path": [
+						"api",
+						"models"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Show One Model",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7103/api/models/22",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7103",
+					"path": [
+						"api",
+						"models",
+						"22"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "404 Not Found - id=22",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7103/api/models/22",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7103",
+							"path": [
+								"api",
+								"models",
+								"22"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/problem+json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 27 Feb 2023 15:16:55 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"type\": \"https://tools.ietf.org/html/rfc7231#section-6.5.4\",\n    \"title\": \"Not Found\",\n    \"status\": 404,\n    \"traceId\": \"00-0733fa41166ef0a8cf3ae5c1e9df2b55-880912024eb9a5cf-00\"\n}"
+				},
+				{
+					"name": "200 OK - id=1",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7103/api/models/1",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7103",
+							"path": [
+								"api",
+								"models",
+								"1"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 27 Feb 2023 15:15:16 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 1,\n    \"name\": \"A-Class\",\n    \"type\": \"Hatchback\",\n    \"year\": 2022,\n    \"description\": \"C-segment/Subcompact executive hatchback.\",\n    \"brandId\": 1\n}"
+				}
+			]
+		},
+		{
+			"name": "Add Model",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 20,\r\n  \"name\": \"Beetle\",\r\n  \"type\": \"Convertible\",\r\n  \"year\": 2019,\r\n  \"description\": \"Discontinued model.\",\r\n  \"brandId\": 3\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7103/api/models",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7103",
+					"path": [
+						"api",
+						"models"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "201 Created - Add Beetle Model",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 20,\r\n  \"name\": \"Beetle\",\r\n  \"type\": \"Convertible\",\r\n  \"year\": 2019,\r\n  \"description\": \"Discontinued model.\",\r\n  \"brandId\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7103/api/models",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7103",
+							"path": [
+								"api",
+								"models"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 27 Feb 2023 17:32:53 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Location",
+							"value": "https://localhost:7103/api/Models/20"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 20,\n    \"name\": \"Beetle\",\n    \"type\": \"Convertible\",\n    \"year\": 2019,\n    \"description\": \"Discontinued model.\",\n    \"brandId\": 3\n}"
+				}
+			]
+		},
+		{
+			"name": "Update Model",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 1,\r\n  \"name\": \"A-Class\",\r\n  \"type\": \"Hatchback\",\r\n  \"year\": 2022,\r\n  \"description\": \"MODIFIED\",\r\n  \"brandId\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7103/api/models/1",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7103",
+					"path": [
+						"api",
+						"models",
+						"1"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "204 No Content - Update Model 1",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 1,\r\n  \"name\": \"A-Class\",\r\n  \"type\": \"Hatchback\",\r\n  \"year\": 2022,\r\n  \"description\": \"MODIFIED\",\r\n  \"brandId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7103/api/models/1",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7103",
+							"path": [
+								"api",
+								"models",
+								"1"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 27 Feb 2023 17:51:53 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Delete Model",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7103/api/models/1",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7103",
+					"path": [
+						"api",
+						"models",
+						"1"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "200 OK - Delete Model 1",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7103/api/models/1",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7103",
+							"path": [
+								"api",
+								"models",
+								"1"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 27 Feb 2023 17:59:19 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 1,\n    \"name\": \"A-Class\",\n    \"type\": \"Hatchback\",\n    \"year\": 2022,\n    \"description\": \"C-segment/Subcompact executive hatchback.\",\n    \"brandId\": 1\n}"
+				}
+			]
+		},
+		{
+			"name": "vefevev",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		}
+	]
+}
