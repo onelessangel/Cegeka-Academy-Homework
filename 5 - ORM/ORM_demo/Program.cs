@@ -23,13 +23,14 @@ internal class Program
 			Customer customer3 = new Customer { Name = "Ion" };
 			Customer customer4 = new Customer { Name = "Angelica" };
 
+			// adauga automat si legaturile pentru customers
 			association1.Customers.Add(customer1);
 			association1.Customers.Add(customer2);
 			association2.Customers.Add(customer2);
 
-			customer1.Associations.Add(association1);
-			customer2.Associations.Add(association1);
-			customer2.Associations.Add(association2);
+			//customer1.Associations.Add(association1);
+			//customer2.Associations.Add(association1);
+			//customer2.Associations.Add(association2);
 
 			//customer3.Associations.Add(association3);
 			//customer4.Associations.Add(association3);
@@ -72,7 +73,6 @@ internal class Program
 			//RemoveOrderItem(db, 8);
 
 			// ORDERS
-
 			//AddOrder(db, 12, 1);
 			//AddOrder(db, 13, 2);
 			//UpdateOrder(db, 8, 14);
@@ -83,23 +83,21 @@ internal class Program
 			//RemoveOrder(db, 6);
 
 
-
-
+			// putem transforma in lista ca sa nu deschidem mai multi Data Readers
 			//var products = db.Products;
-
 			//foreach (var product in products)
 			//{
-			//	RemoveProduct(db, product.ProductId);
+			//	//RemoveProduct(db, product.ProductId);
 			//}
 
+			// STERGERE MULTIPLA
+			////products.RemoveRange(products);
+			///db.SaveChanges();
 
-			Console.WriteLine("HELLO");
-			//Console.WriteLine(association.Customers.Count);
+			// aduce referinta la customers - cand clasa mea contine referinte catre alte obiecte
+			//var association = db.Associations.Include(a => a.Customers).FirstOrDefault(a => a.AssociationId == 1);
 
-			//foreach (Customer customer in association.Customers)
-			//{
-			//	Console.WriteLine(customer.Name);
-			//}
+			GetTotalAssociationExpenses(db, 1);
 		}
 	}
 
@@ -150,6 +148,7 @@ internal class Program
 		db.Orders.Add(order);
 		db.SaveChanges();
 
+		// include referintele catre lista de itemi
 		order = db.Orders.Include(o => o.Items).First();
 		order.Items.Add(orderItem);
 		db.SaveChanges();
@@ -231,28 +230,32 @@ internal class Program
 
 	private static void GetTotalAssociationExpenses(DatabaseContext db, int associationId)
 	{
-		var association = db.Associations.Find(associationId);
+		var association = db.Associations
+								.Include(a => a.Customers)
+								.FirstOrDefault(a => a.AssociationId == 1);
 
 		if (association == null)
 		{
 			return;
 		}
 
-		int total = 0;
+		double total = 0;
 
 		foreach (Customer customer in association.Customers)
 		{
-			//foreach (Order order in db.Orders)
-			//{
-			//	if (order.Customer.CustomerId != customer.CustomerId)
-			//	{
-			//		continue;
-			//	}
-
-			//	Console.WriteLine("HELLO");
-			//}
-			Console.WriteLine(customer.Name);
+			foreach (Order order in db.Orders
+										.Include(o => o.Items)
+										.ThenInclude(i => i.Product)
+										.Where(o => o.Customer.CustomerId != customer.CustomerId))
+			{
+				foreach (OrderItem item in order.Items)
+				{
+					total += item.Quantity * item.Product.Price;
+				}
+			}
 		}
+
+		Console.WriteLine($"Total {association.Title} expenses: {total} ron.");
 	}
 
 }
