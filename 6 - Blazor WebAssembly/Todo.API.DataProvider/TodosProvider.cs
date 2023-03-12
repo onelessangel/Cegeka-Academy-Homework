@@ -33,6 +33,7 @@ namespace Todo.API.DataProvider
             var itemToEdit = await GetTodo(item.Id.Value);
             itemToEdit.Title = item.Title;
             itemToEdit.IsDone = item.IsDone;
+            itemToEdit.Description = item.Description;
         }
 
         public async Task Remove(Guid todoId)
