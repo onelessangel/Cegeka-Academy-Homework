@@ -46,10 +46,10 @@ Good luck in making them come true!
                    @* <a class="btn btn-success table-btn" data-toggle="tooltip" data-placement="bottom" title="Quick Add">
                         <i class="fas fa-bolt"></i>
                     </a>*@
-                    <a href="@($"todos/{item.Id.ToString()}")" class="btn btn-primary table-btn">
+                    <a href="@($"todos/{item.Id.ToString()}")" class="btn btn-primary table-btn" data-toggle="tooltip" data-placement="bottom" title="Edit">
                         <i class="fas fa-edit"></i>
                     </a>
-                    <a href="#" class="btn btn-danger table-btn" @onclick="@(() => DeleteTodo(item))">
+                    <a href="#" class="btn btn-danger table-btn" @onclick="@(() => DeleteTodo(item))" data-toggle="tooltip" data-placement="bottom" title="Delete">
                         <i class="fas fa-trash"></i>
                     </a>
                 </td>
