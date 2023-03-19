@@ -10,8 +10,8 @@ Good luck in making them come true!
     <thead>
         <tr>
             <th>Title</th>
-            <th>Is it done?</th>
             <th>Deadline</th>
+            <th>Is it done?</th>
             <td>Actions</td>
         </tr>
     </thead>
@@ -19,14 +19,33 @@ Good luck in making them come true!
         @foreach (var item in Items)
         {
             <tr>
-                <td>@item.Title</td>
                 <td>
-                    @item.IsDone
+                    @if (item.IsDone)
+                    {
+                        <strike>@item.Title</strike>
+                    }
+                    else
+                    {
+                        @item.Title
+                    }
                 </td>
                 <td>
                     @item.Deadline.ToString("dd/MM/yyyy HH:mm")
                 </td>
                 <td>
+                    @if (item.IsDone)
+                    {
+                        <i class="fas fa-check"></i>
+                    }
+                    else
+                    {
+                        <span>✖</span>
+                    }
+                </td>
+                <td>
+                   @* <a class="btn btn-success table-btn" data-toggle="tooltip" data-placement="bottom" title="Quick Add">
+                        <i class="fas fa-bolt"></i>
+                    </a>*@
                     <a href="@($"todos/{item.Id.ToString()}")" class="btn btn-primary table-btn">
                         <i class="fas fa-edit"></i>
                     </a>
@@ -44,7 +63,6 @@ Good luck in making them come true!
                     CloseEventCallback="@OnConfirmationDeleteTodoDialogClosed"></ConfirmationDialog>
 
 <Counter></Counter>
-
 
 @*<ErrorBoundary>
     <ChildContent>
