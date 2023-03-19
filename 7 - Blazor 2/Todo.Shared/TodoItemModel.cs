@@ -18,17 +18,20 @@ namespace Todo.Shared
 		[MaxLength(1000, ErrorMessage = "Please shorten the description")]
 		public string Description { get; set; } = string.Empty;
 
+		[DataType(DataType.Date)]
+		public DateTime Deadline { get; set; } = DateTime.Now;
 		public bool IsDone { get; set; }
 		
         public TodoItemModel()
         {
         }
 
-        public TodoItemModel(Guid id, string title = "", string description = "", bool isDone = false)
+        public TodoItemModel(Guid id, string title = "", string description = "", DateTime? deadline = null, bool isDone = false)
         {
             Id = id;
             Title = title;
             Description = description;
+            Deadline = deadline ?? DateTime.Now;
             IsDone = isDone;
         }
     }

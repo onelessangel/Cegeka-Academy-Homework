@@ -11,6 +11,7 @@ Good luck in making them come true!
         <tr>
             <th>Title</th>
             <th>Is it done?</th>
+            <th>Deadline</th>
             <td>Actions</td>
         </tr>
     </thead>
@@ -21,6 +22,9 @@ Good luck in making them come true!
                 <td>@item.Title</td>
                 <td>
                     @item.IsDone
+                </td>
+                <td>
+                    @item.Deadline.ToString("dd/MM/yyyy HH:mm")
                 </td>
                 <td>
                     <a href="@($"todos/{item.Id.ToString()}")" class="btn btn-primary table-btn">

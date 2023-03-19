@@ -20,6 +20,8 @@ namespace Todo.API.DataProvider.Entities
         [MaxLength(1000)]
         public string Description { get; set; } = string.Empty;
 
+		public DateTime Deadline { get; set; } = DateTime.Now;
+
         public bool IsDone { get; set; }
     }
 }
