@@ -17,6 +17,7 @@ namespace Todo.API.DataProvider
                 Id = entity.PublicId,
                 Title = entity.Title,
                 Description = entity.Description,
+                Deadline = entity.Deadline,
                 IsDone = entity.IsDone
             };
         }

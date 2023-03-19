@@ -57,9 +57,9 @@ namespace Todo.API.DataProvider
         {
             return new List<TodoItemModel>
             {
-                new TodoItemModel(Guid.NewGuid(), "Read from a book", "Left at page 31", false),
-                new TodoItemModel(Guid.NewGuid(), "Hit the gym", "Go at 6 PM", false),
-                new TodoItemModel(Guid.NewGuid(), "Meeting at Cegeka Academy", "Submit your homework in time", false)
+                new TodoItemModel(Guid.NewGuid(), "Read from a book", "Left at page 31", DateTime.Parse("2023-03-18"), false),
+                new TodoItemModel(Guid.NewGuid(), "Hit the gym", "Go at 6 PM", DateTime.Parse("2023-03-20"), false),
+                new TodoItemModel(Guid.NewGuid(), "Meeting at Cegeka Academy", "Submit your homework in time", DateTime.Parse("2023-03-20"), false)
             };
         }
 

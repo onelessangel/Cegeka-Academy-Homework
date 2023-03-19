@@ -30,10 +30,11 @@ namespace Todo.API.DataProvider
             context.TodoItems.Add(new TodoItem
             {
                 PublicId = item.Id.Value,
-                IsDone = item.IsDone,
                 Title = item.Title,
-                Description = item.Description
-            });
+                Description = item.Description,
+                Deadline = item.Deadline,
+				IsDone = item.IsDone
+			});
 
             await context.SaveChangesAsync();
         }
@@ -48,6 +49,7 @@ namespace Todo.API.DataProvider
             var entity = await this.GetTodoEntity(model.Id.Value);
             entity.Title = model.Title;
             entity.Description = model.Description;
+            entity.Deadline = model.Deadline;
             entity.IsDone = model.IsDone;
             await context.SaveChangesAsync();
         }
