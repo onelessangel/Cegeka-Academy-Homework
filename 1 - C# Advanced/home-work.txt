@@ -1,0 +1,37 @@
+Tipuri de date
+		public class Employee
+		{
+			public string firstName;
+		}
+		
+		Employee emp1 = new Employee();
+		emp1.firstName = "John";
+		Employee emp2 = emp1;
+		emp2.firstName = "Jack";
+		string check = emp1.firstName;// Ce valoare avem aici ?
+		Console.WriteLine(check);
+		
+		AlterEmployee(emp1, "Ted");		
+		Console.WriteLine(emp1.firstName);
+		
+		void AlterEmployee(Employee emp, string newName)
+		{
+			emp.firstName = newName;
+			/* TODO home work: 
+			Ce se intampla daca rulez urmatorul cod:
+			emp = new Employee();
+			emp.firstName = newName; // ??? Cum fixez problema?
+			*/
+
+Tipuri generice 
+De adaugat o metoda noua care imi va returna un obiect din lista _items dupa Id.
+
+LINQ 
+        First country that contains in name `ana`
+        Single country that contains more than 1 billion
+        compute % from global population for each country.
+
+
+Nu uitati si de tema din prezentare. 
+
+Happy Coding :)
